@@ -34,7 +34,6 @@ public class Data {
 	/**
 	 * Getter et Setter
 	 */
-
 	public int getNbRow() {
 		return nbRow;
 	}
@@ -43,6 +42,7 @@ public class Data {
 		this.nbRow = nbRow;
 	}
 
+	
 	public int getNbSlot() {
 		return nbSlot;
 	}
@@ -51,6 +51,7 @@ public class Data {
 		this.nbSlot = nbSlot;
 	}
 
+	
 	public int getNbSlotIndispo() {
 		return nbSlotIndispo;
 	}
@@ -59,6 +60,7 @@ public class Data {
 		this.nbSlotIndispo = nbSlotIndispo;
 	}
 
+	
 	public int getNbPoule() {
 		return nbPoule;
 	}
@@ -67,6 +69,7 @@ public class Data {
 		this.nbPoule = nbPoule;
 	}
 
+	
 	public int getNbServeur() {
 		return nbServeur;
 	}
@@ -83,6 +86,7 @@ public class Data {
 		return coordSlotIndispo[i];
 	}
 	
+	
 	public void setCoordSlotIndispo(Coord[] coordSlotIndispo) {
 		this.coordSlotIndispo = coordSlotIndispo;
 	}
@@ -91,6 +95,7 @@ public class Data {
 		this.coordSlotIndispo[i] = coordSlotIndispo;
 	}
 
+	
 	public Serveur[] getServeurs() {
 		return serveurs;
 	}
@@ -99,22 +104,11 @@ public class Data {
 		return serveurs[i];
 	}
 
-	public void setServeurs(Serveur[] serveurs) {
-		this.serveurs = serveurs;
-	}
-	
-	public void setServeurs(int i, Serveur serveurs) {
-		this.serveurs[i] = serveurs;
-	}
-	
 	/**
 	 * Méthode add serveur dans le tableau serveurs
 	 */
-	
-	public void addServeur(Serveur serveur, int i) {
-		serveurs[i] = serveur;
+	public void setServeurs(int i, Serveur serveurs) {
+		this.serveurs[i] = serveurs;
 	}
-	
-	
 }
 

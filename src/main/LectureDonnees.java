@@ -29,18 +29,15 @@ public class LectureDonnees {
 				int nbServeur = scanner.nextInt();
 				
 				data = new Data(nbRow, nbSlot, nbSlotIndispo, nbPoule, nbServeur);
-				System.out.println(data.getNbRow()+", "+data.getNbSlot()+", "+data.getNbSlotIndispo()+", "+data.getNbPoule()+", "+data.getNbServeur());  // TODO A supprimer avant de rendre
 				
 				//Lecture des slots indisponibles
 				for (int i = 0; i < data.getNbSlotIndispo(); i++) {
 					data.setCoordSlotIndispo(i, new Coord(scanner.nextInt(),scanner.nextInt()));
-					System.out.print(data.getCoordSlotIndispo(i) + " "); // TODO A supprimer avant de rendre
 				}
 				
 				//Lecture des cractéristiques serveur ( taille et capacité)
 				for(int i=0; i<data.getNbServeur();i++) {
 					data.setServeurs(i, new Serveur(scanner.nextInt(),scanner.nextInt()));
-					System.out.print(data.getServeurs(i) + " "); // TODO A supprimer avant de rendre
 				}
 					
 				
