@@ -1,5 +1,7 @@
 package main;
 
+import heuristique.BinPacking;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -8,6 +10,7 @@ public class Main {
 
 		LectureDonnees f = new LectureDonnees();
 		Data data = f.getFromFile(fichierData);
+		
 	}
 
 }
