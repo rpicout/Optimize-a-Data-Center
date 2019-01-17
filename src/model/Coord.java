@@ -2,6 +2,8 @@ package model;
 
 public class Coord {
 	
+	//Je pense qu'il y a moyen de supprimer cette classe en mettant un boolean indispo dans la classe Slot
+	
 	private int x;
 	private int y;
 	

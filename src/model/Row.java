@@ -2,22 +2,28 @@ package model;
 
 public class Row {
 
-	private Slot[] slots;
+	private Slot[] slot;
 	
 	
-	public Row(Slot[] slots) {
+	public Row(Slot[] slot) {
 		super();
-		this.slots = slots;
+		this.slot = slot;
 	}
 
 	
-	public Slot[] getSlots() {
-		return slots;
+	public Slot[] getSlot() {
+		return slot;
 	}
 
-	public void setSlots(Slot[] slots) {
-		this.slots = slots;
+	public Slot getSlot(int i){
+		return slot[i];
 	}
 	
+	public void setSlot(Slot[] slot) {
+		this.slot = slot;
+	}
 	
+	public void setSlot(int i, Slot slot){
+		this.slot[i] = slot;
+	}
 }

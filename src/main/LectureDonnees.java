@@ -36,8 +36,8 @@ public class LectureDonnees {
 				}
 				
 				//Lecture des cractéristiques serveur ( taille et capacité)
-				for(int i=0; i<data.getNbServeur();i++) {
-					data.setServeurs(i, new Serveur(scanner.nextInt(),scanner.nextInt()));
+				for(int i=0; i < data.getNbServeur(); i++) {
+					data.setServeurs(i, new Serveur(i, scanner.nextInt(),scanner.nextInt()));
 				}
 					
 				
@@ -49,8 +49,6 @@ public class LectureDonnees {
 		catch (FileNotFoundException exception) {
 			System.out.println("Le fichier n'a pas été trouvé");
 		}
-		
-		
 		
 		return data;
 	}
