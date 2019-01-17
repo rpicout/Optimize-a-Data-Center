@@ -5,6 +5,7 @@ public class Serveur {
 	private int numero;
 	private int capacite;
 	private int taille;
+	private int poule;
 	
 	
 	public Serveur(int numero, int capacite, int taille) {
@@ -12,6 +13,7 @@ public class Serveur {
 		this.numero = numero;
 		this.capacite = capacite;
 		this.taille = taille;
+		this.poule = -1;
 	}
 	
 	
@@ -39,6 +41,15 @@ public class Serveur {
 	
 	public void setTaille(int taille) {
 		this.taille = taille;
-	}	
+	}
 
+
+	public int getPoule() {
+		return poule;
+	}
+
+	public void setPoule(int poule) {
+		this.poule = poule;
+	}	
+	
 }

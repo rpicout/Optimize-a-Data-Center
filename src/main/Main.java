@@ -13,7 +13,10 @@ public class Main {
 		
 
 		Gloutonne gloutonne = new Gloutonne();
-		int[] triServeur = gloutonne.getTriServeurCapacite(data);
+		Data newdata = gloutonne.getSolution(data);
+		
+		EcritureResultats ecritureResultats = new EcritureResultats();
+		ecritureResultats.write(newdata);
 	}
 
 }

@@ -5,9 +5,13 @@ public class Row {
 	private Slot[] slot;
 	
 	
-	public Row(Slot[] slot) {
+	public Row(int nbSlot) {
 		super();
-		this.slot = slot;
+		this.slot = new Slot[nbSlot];
+		
+		for (int i = 0; i < nbSlot; i++) {
+			this.slot[i] = new Slot(null, false);
+		}
 	}
 
 	
