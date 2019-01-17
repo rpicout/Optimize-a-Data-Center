@@ -1,6 +1,6 @@
 package main;
 
-import heuristique.BinPacking;
+import heuristique.Gloutonne;
 
 public class Main {
 
@@ -11,6 +11,9 @@ public class Main {
 		LectureDonnees f = new LectureDonnees();
 		Data data = f.getFromFile(fichierData);
 		
+
+		Gloutonne gloutonne = new Gloutonne();
+		int[] triServeur = gloutonne.getTriServeurCapacite(data);
 	}
 
 }
