@@ -14,16 +14,17 @@ public class Main {
 		
 
 		Gloutonne gloutonne = new Gloutonne();
-
 		int[] triServeurCapacite = gloutonne.getTriServeurCapacite(data);
 		
 		BinPacking binPacking = new BinPacking();
 		int[] triServeurTaille = binPacking.getTriServeurTaille(data);
-
-		Data newdata = gloutonne.getSolution(data);
+		Data essai = binPacking.getSolution(data);
+		
+		
+		//Data newdata = gloutonne.getSolution(data);
 		
 		EcritureResultats ecritureResultats = new EcritureResultats();
-		ecritureResultats.write(newdata);
+		ecritureResultats.write(essai);
 
 	}
 
