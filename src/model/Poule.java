@@ -13,16 +13,20 @@ public class Poule {
 	}
 
 
-	public List<Serveur> getSlots() {
+	public List<Serveur> getServeurs() {
 		return serveurs;
 	}
 	
-	public Serveur getSlots(int i) {
+	public Serveur getServeurs(int i) {
 		return serveurs.get(i);
 	}
 
-	public void setSlots(List<Serveur> serveurs) {
+	public void setServeurs(List<Serveur> serveurs) {
 		this.serveurs = serveurs;
+	}
+	
+	public void addServeur(Serveur serveur) {
+		this.serveurs.add(serveur);
 	}
 	
 }

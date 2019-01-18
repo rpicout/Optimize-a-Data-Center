@@ -15,16 +15,6 @@ public class Serveur {
 		this.taille = taille;
 		this.poule = -1;
 	}
-	
-	
-	public int getPoule() {
-		return poule;
-	}
-
-
-	public void setPoule(int poule) {
-		this.poule = poule;
-	}
 
 
 	public int getNumero() {
@@ -51,6 +41,15 @@ public class Serveur {
 	
 	public void setTaille(int taille) {
 		this.taille = taille;
-	}	
+	}
 
+
+	public int getPoule() {
+		return poule;
+	}
+
+	public void setPoule(int poule) {
+		this.poule = poule;
+	}	
+	
 }

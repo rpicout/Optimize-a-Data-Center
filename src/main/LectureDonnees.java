@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import model.Coord;
 import model.Serveur;
 
 
@@ -20,7 +19,7 @@ public class LectureDonnees {
 			Scanner scanner = new Scanner(f);
 			
 			try {
-				
+				System.out.println("Lecture des données");
 				//Lecture de la première ligne
 				int nbRow = scanner.nextInt();
 				int nbSlot = scanner.nextInt();
@@ -30,9 +29,15 @@ public class LectureDonnees {
 				
 				data = new Data(nbRow, nbSlot, nbSlotIndispo, nbPoule, nbServeur);
 				
+				int row;
+				int slot;
+				
 				//Lecture des slots indisponibles
 				for (int i = 0; i < data.getNbSlotIndispo(); i++) {
-					data.setCoordSlotIndispo(i, new Coord(scanner.nextInt(),scanner.nextInt()));
+					row = scanner.nextInt();
+					slot = scanner.nextInt();
+					data.getRow(row).getSlot(slot).setIndispo(true);
+					//data.setCoordSlotIndispo(i, new Coord(scanner.nextInt(),scanner.nextInt()));
 				}
 				
 				//Lecture des cractéristiques serveur ( taille et capacité)
@@ -40,7 +45,7 @@ public class LectureDonnees {
 					data.setServeurs(i, new Serveur(i, scanner.nextInt(),scanner.nextInt()));
 				}
 					
-				
+				System.out.println("Fin lecture des données");
 			}catch (NoSuchElementException exception) {
 				System.out.println("erreur");
 			}

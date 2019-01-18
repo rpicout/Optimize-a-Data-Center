@@ -14,6 +14,8 @@ public class Gloutonne {
 	 */
 	public int[] getTriServeurCapacite(Data data){
 		
+		System.out.println("Début tri");
+		
 		Serveur[] serveurs = data.getServeurs();
 		int[] triServeur = new int[data.getNbServeur()]; 
 		int numTailleMax;
@@ -38,64 +40,76 @@ public class Gloutonne {
 			triServeur[i] = capaciteMax;
 			
 		}
-		
+		System.out.println("Fin tri");
 		return triServeur;
 	}
 	
+	
 	/**
+	 * Méthode calculant la solution de la méthode gloutonne
 	 * 
 	 * @param data
 	 * @return la solution de la méthode gloutonne
 	 */
 	public Data getSolution(Data data){
 		
+		System.out.println("Début méthode gloutonne");
+		
 		int[] triCapacite = getTriServeurCapacite(data);
+		Serveur serveur = null;
 		
 		for (int i = 0; i < data.getNbServeur(); i++){
 			
-			Serveur serveur = data.getServeurs(triCapacite[i]);
+			serveur = data.getServeurs(triCapacite[i]);
 			boolean add = false;
 			
 			//On ajoute le serveur à un emplacement
-			while (!add){
-				for (int r = 0; r < data.getNbRow(); r++){
-					for (int s = 0; s < data.getNbSlot(); s++){
+			int r = 0;
+			int s = 0;
+			while (!add && r < data.getNbRow() && s < data.getNbSlot()){
+				Slot slot = data.getRow(r).getSlot(s);
 						
-						Slot slot = data.getRow(r).getSlot(s);
-						
-						if (slot.getServeur() == null){
-							if (serveur.getTaille() + s <= data.getNbSlot()){
-								for (int k = s; k < serveur.getTaille() + s; k++){
-									data.getRow(r).getSlot(k).setServeur(serveur);
-								}
-								add = true;
-							}
+				if (slot.getServeur() == null && !slot.isIndispo()){
+					if (serveur.getTaille() + s < data.getNbSlot()){
+						for (int k = s; k < serveur.getTaille() + s; k++){
+							data.getRow(r).getSlot(k).setServeur(serveur);
 						}
-						
+						add = true;
+						//System.out.println(triCapacite[i] + " ajouté " + serveur.getCapacite() + " " + serveur.getTaille());
 					}
 				}
+				
+				if (!add) {
+					s++;
+					if (s == data.getNbSlot()) {
+						s = 0;
+						r ++;
+					}
+				}	
+				
 			}
-			
-			/*
-			 *  int numPool = 0 ;
-				Pour r allant de 1 à nbRangées Faire
-				Pour s allant de 1 à nbSlots Faire
-						Si serveur n’est pas affecté à un pool
-							Si numPool = nbPool-1
-								numPool = 0 ;
-							Fin Si
-							Affecter le serveur à l’emplacement [r,s] à la pool numPool
-							numPool ++
-						Fin si
-					Fin pour
-				Fin pour
-				Calculer la plus petite capacité garantie de tous les groupes
-
-			 */
-			
 		}
 		
-		return null;
+		int numPool = 0;
+		for (int r = 0; r < data.getNbRow(); r++){
+			for (int s = 0; s < data.getNbSlot(); s++){
+				
+				serveur = data.getRow(r).getSlot(s).getServeur();
+				if (serveur != null && serveur.getPoule() == -1) {
+					
+					if (numPool == data.getNbPoule() - 1)
+						numPool = 0;
+					
+					serveur.setPoule(numPool);
+					data.getPoule(numPool).addServeur(serveur);
+					numPool++;
+					
+				}
+				
+			}
+		}
+		System.out.println("Fin méthode gloutonne");
+		return data;
 	}
 
 }

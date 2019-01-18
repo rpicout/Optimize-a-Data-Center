@@ -32,7 +32,14 @@ public class Data {
 		this.serveurs = new Serveur[nbServeur];
 		this.poule = new Poule[nbPoule];
 		this.row = new Row[nbRow];
-
+		
+		for (int i = 0; i < nbRow; i++) {
+			this.row[i] = new Row(nbSlot);
+		}
+		
+		for (int i = 0; i < nbPoule; i++) {
+			this.poule[i] = new Poule();
+		}
 	}
 	
 	/**
