@@ -5,16 +5,28 @@ public class Serveur {
 	private int numero;
 	private int capacite;
 	private int taille;
+	private int poule;
 	
 	
-	public Serveur(int numero, int capacite, int taille) {
+	public Serveur(int numero, int taille, int capacite) {
 		super();
 		this.numero = numero;
 		this.capacite = capacite;
 		this.taille = taille;
+		this.poule = -1;
 	}
 	
 	
+	public int getPoule() {
+		return poule;
+	}
+
+
+	public void setPoule(int poule) {
+		this.poule = poule;
+	}
+
+
 	public int getNumero() {
 		return numero;
 	}

@@ -1,5 +1,6 @@
 package main;
 
+import heuristique.BinPacking;
 import heuristique.Gloutonne;
 
 public class Main {
@@ -13,7 +14,10 @@ public class Main {
 		
 
 		Gloutonne gloutonne = new Gloutonne();
-		int[] triServeur = gloutonne.getTriServeurCapacite(data);
+		int[] triServeurCapacite = gloutonne.getTriServeurCapacite(data);
+		
+		BinPacking binPacking = new BinPacking();
+		int[] triServeurTaille = binPacking.getTriServeurTaille(data);
 	}
 
 }
