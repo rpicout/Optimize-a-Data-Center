@@ -11,21 +11,18 @@ public class Main {
 
 		LectureDonnees f = new LectureDonnees();
 		Data data = f.getFromFile(fichierData);
-		
+
+		EcritureResultats ecritureResultats = new EcritureResultats();
 
 		Gloutonne gloutonne = new Gloutonne();
-		int[] triServeurCapacite = gloutonne.getTriServeurCapacite(data);
+		Data newdata = gloutonne.getSolution(data);
+		ecritureResultats.write(newdata, "Gloutonne");
 		
-		/*
+		
 		BinPacking binPacking = new BinPacking();
 		int[] triServeurTaille = binPacking.getTriServeurTaille(data);
 		Data essai = binPacking.getSolution(data);
-		*/
-		
-		Data newdata = gloutonne.getSolution(data);
-		
-		EcritureResultats ecritureResultats = new EcritureResultats();
-		ecritureResultats.write(newdata);
+		ecritureResultats.write(essai, "BinPacking");
 
 	}
 

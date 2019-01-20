@@ -10,9 +10,9 @@ public class EcritureResultats {
 	
 	private File file;
 	
-	public void write (Data data) {
+	public void write (Data data, String name) {
 		System.out.println("Début écriture des résultats");
-		file = new File("OutputData/result");
+		file = new File("OutputData/result." + name);
 		try {
 			FileWriter fw = new FileWriter(file);
 			
