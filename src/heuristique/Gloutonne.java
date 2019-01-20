@@ -122,13 +122,12 @@ public class Gloutonne {
 				serveur = data.getRow(r).getSlot(s).getServeur();
 				if (serveur != null && serveur.getPoule() == -1) {
 					
-					if (numPool == data.getNbPoule() - 1)
-						numPool = 0;
-					
 					serveur.setPoule(numPool);
 					data.getPoule(numPool).addServeur(serveur);
 					numPool++;
-					
+
+					if (numPool == data.getNbPoule())
+						numPool = 0;
 				}
 				
 			}
@@ -147,7 +146,7 @@ public class Gloutonne {
 						System.out.print("** ");
 				}
 			}
-			System.out.println("");
+			System.out.println("\n");
 		}
 		
 		System.out.println("Fin méthode gloutonne");

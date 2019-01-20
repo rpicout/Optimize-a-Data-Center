@@ -13,16 +13,18 @@ public class Main {
 		Data data = f.getFromFile(fichierData);
 
 		EcritureResultats ecritureResultats = new EcritureResultats();
+		Score score = new Score();
 
 		Gloutonne gloutonne = new Gloutonne();
 		Data newdata = gloutonne.getSolution(data);
 		ecritureResultats.write(newdata, "Gloutonne");
+		System.out.println("Score : " + score.calculScore(newdata));
 		
 		
 		BinPacking binPacking = new BinPacking();
-		int[] triServeurTaille = binPacking.getTriServeurTaille(data);
 		Data essai = binPacking.getSolution(data);
 		ecritureResultats.write(essai, "BinPacking");
+		System.out.println("Score : " + score.calculScore(essai));
 
 	}
 
