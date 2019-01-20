@@ -102,20 +102,30 @@ public class BinPacking {
 			int r = rangeRetenue;
 			int s = 0;
 			while (!add && r < data.getNbRow() && s < data.getNbSlot()) {
-				Slot slot = data.getRow(r).getSlot(s);
-
-				if (slot.getServeur() == null && !slot.isIndispo()) {
-					if (serveur.getTaille() + s < data.getNbSlot()) {
-						for (int k = s; k < serveur.getTaille() + s; k++) {
-							data.getRow(r).getSlot(k).setServeur(serveur);
+				
+				if (serveur.getTaille() + s <= data.getNbSlot()){
+					Slot slot;
+					
+					// On vérifie que les slots qui suivent sont disponibles
+					int k = s;
+					boolean ispossible = true;
+					while (ispossible && k < serveur.getTaille() + s) {
+						slot = data.getRow(r).getSlot(k);
+						if (slot.getServeur() != null || slot.isIndispo()){
+							ispossible = false;
+						}
+						k++;
+					}
+					
+					// Si il est possible d'ajouter le serveur, on l'ajoute
+					if (ispossible) {
+						for (int j = s; j < serveur.getTaille() + s; j++) {
+							slot = data.getRow(r).getSlot(j);
+							slot.setServeur(serveur);
 						}
 						add = true;
-						//System.out.println("le serveur " + i + " à été ajouté à la rangé " + r);// TODO
-
-					}else{
-						//System.out.println("le serveur " + i + " n'a pas été ajouter a une rangé");// TODO
-
 					}
+					//System.out.println(triCapacite[i] + " ajouté " + serveur.getCapacite() + " " + serveur.getTaille());
 				}
 
 				if (!add) { // J'ai laissée cette condition car je ne vérifie pas si les slots encore dispo

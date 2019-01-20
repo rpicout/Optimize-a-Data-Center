@@ -74,25 +74,14 @@ public class Gloutonne {
 					// On vérifie que les slots qui suivent sont disponibles
 					int k = s;
 					boolean ispossible = true;
-					if (serveur.getTaille() == 1 && k > 97) {
-						
-						while (ispossible && k < serveur.getTaille() + s) {
-							slot = data.getRow(r).getSlot(k);
-							if (slot.getServeur() != null || slot.isIndispo()){
-								ispossible = false;
-							}
-							k++;
+					while (ispossible && k < serveur.getTaille() + s) {
+						slot = data.getRow(r).getSlot(k);
+						if (slot.getServeur() != null || slot.isIndispo()){
+							ispossible = false;
 						}
+						k++;
 					}
-					else {
-						while (ispossible && k < serveur.getTaille() + s) {
-							slot = data.getRow(r).getSlot(k);
-							if (slot.getServeur() != null || slot.isIndispo()){
-								ispossible = false;
-							}
-							k++;
-						}
-					}
+					
 					// Si il est possible d'ajouter le serveur, on l'ajoute
 					if (ispossible) {
 						for (int j = s; j < serveur.getTaille() + s; j++) {
@@ -122,13 +111,12 @@ public class Gloutonne {
 				serveur = data.getRow(r).getSlot(s).getServeur();
 				if (serveur != null && serveur.getPoule() == -1) {
 					
-					if (numPool == data.getNbPoule() - 1)
-						numPool = 0;
-					
 					serveur.setPoule(numPool);
 					data.getPoule(numPool).addServeur(serveur);
 					numPool++;
-					
+
+					if (numPool == data.getNbPoule())
+						numPool = 0;
 				}
 				
 			}
