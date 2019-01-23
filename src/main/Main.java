@@ -1,5 +1,6 @@
 package main;
 
+import heuristique.AutreEssai;
 import heuristique.BinPacking;
 import heuristique.Gloutonne;
 
@@ -25,6 +26,10 @@ public class Main {
 		Data essai = binPacking.getSolution(data);
 		ecritureResultats.write(essai, "BinPacking");
 		System.out.println("Score : " + score.calculScore(essai));
+		
+		data = f.getFromFile(fichierData);
+		AutreEssai autreEssai = new AutreEssai();
+		int[] voir = autreEssai.getTriServeurCapaciteTaille(data);
 
 	}
 

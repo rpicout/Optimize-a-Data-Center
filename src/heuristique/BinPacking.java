@@ -56,7 +56,7 @@ public class BinPacking {
 	 * @return la solution de la méthode BinPacking
 	 */
 	public Data getSolution(Data data) {
-
+		System.out.println("Début méthode BinPacking");
 		int[] triServeurTaille = getTriServeurTaille(data);
 
 		Serveur serveur = null;
@@ -190,7 +190,7 @@ public class BinPacking {
 			}
 			System.out.println("");
 		}
-		
+		System.out.println("Fin méthode BinPacking");
 		return data;
 	}
 
