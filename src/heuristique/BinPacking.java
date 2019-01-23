@@ -79,7 +79,7 @@ public class BinPacking {
 						sd++;
 					}
 				}
-				// System.out.println("il y a " +sd+" slot indisponible sur la rangé " + j);//TODO
+				//System.out.println("il y a " +sd+" slot indisponible sur la rangé " + j);//TODO
 				disp = disp - sd;
 				if (disp >= serveur.getTaille()) { 
 					espaceResiduel = (disp - serveur.getTaille());
@@ -101,7 +101,7 @@ public class BinPacking {
 			// On ajoute le serveur à un emplacement
 			int r = rangeRetenue;
 			int s = 0;
-			while (!add && r < data.getNbRow() && s < data.getNbSlot()) {
+			while (!add &&  s < data.getNbSlot()) {
 				
 				if (serveur.getTaille() + s <= data.getNbSlot()){
 					Slot slot;
@@ -134,6 +134,10 @@ public class BinPacking {
 					if (s == data.getNbSlot()) {
 						s = 0;
 						r++;
+						if (r == data.getNbRow())
+							r = 0;
+						if (r == rangeRetenue)
+							add = true;
 					}
 				}
 
@@ -154,6 +158,22 @@ public class BinPacking {
 			//System.out.println("le serveur " + i + " est ajouter au pool " + poolRetenu);//TODO
 
 		}
+		
+		// TODO A supprimer 
+				//Permet d'afficher dans la console à quoi "ressemble" le data center 
+				for (int r = 0; r < data.getNbRow(); r++){
+					for (int s = 0; s < data.getNbSlot(); s++){
+						if (data.getRow(r).getSlot(s).isIndispo())
+							System.out.print(".. ");
+						else {
+							if (data.getRow(r).getSlot(s).getServeur() != null)
+								System.out.print(data.getRow(r).getSlot(s).getServeur().getNumero() + " ");
+							else 
+								System.out.print("** ");
+						}
+					}
+					System.out.println("");
+				}
 
 
 		return data;

@@ -20,7 +20,7 @@ public class Main {
 		ecritureResultats.write(newdata, "Gloutonne");
 		System.out.println("Score : " + score.calculScore(newdata));
 		
-		
+		data = f.getFromFile(fichierData);
 		BinPacking binPacking = new BinPacking();
 		Data essai = binPacking.getSolution(data);
 		ecritureResultats.write(essai, "BinPacking");
