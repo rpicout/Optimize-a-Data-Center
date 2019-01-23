@@ -175,7 +175,22 @@ public class BinPacking {
 					System.out.println("");
 				}
 
-
+		// TODO A supprimer 
+		//Permet d'afficher dans la console à quoi "ressemble" le data center 
+		for (int r = 0; r < data.getNbRow(); r++){
+			for (int s = 0; s < data.getNbSlot(); s++){
+				if (data.getRow(r).getSlot(s).isIndispo())
+					System.out.print(".. ");
+				else {
+					if (data.getRow(r).getSlot(s).getServeur() != null)
+						System.out.print(data.getRow(r).getSlot(s).getServeur().getNumero() + " ");
+					else 
+						System.out.print("** ");
+				}
+			}
+			System.out.println("");
+		}
+		
 		return data;
 	}
 
