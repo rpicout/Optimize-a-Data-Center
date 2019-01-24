@@ -49,6 +49,7 @@ public class BinPacking {
 		return triServeur;
 	}
 
+
 	/**
 	 * Méthode calculant la solution de la méthode BinPacking
 	 * 
@@ -142,7 +143,7 @@ public class BinPacking {
 				}
 
 			}
-			int p = data.getNbPoule(); 
+			int p = Integer.MAX_VALUE;   //Si j'ai bien compris tu veux la pool avec le moins de serveurs, du coup il faut prendre un très grand p pour l'initialisation  
 			int poolRetenu = 0;
 			for(int j = 0 ; j < data.getNbPoule(); j++){
 				if(data.getPoule(j).getServeurs().size() + 1 < p) {
@@ -159,21 +160,7 @@ public class BinPacking {
 
 		}
 		
-		// TODO A supprimer 
-				//Permet d'afficher dans la console à quoi "ressemble" le data center 
-				for (int r = 0; r < data.getNbRow(); r++){
-					for (int s = 0; s < data.getNbSlot(); s++){
-						if (data.getRow(r).getSlot(s).isIndispo())
-							System.out.print(".. ");
-						else {
-							if (data.getRow(r).getSlot(s).getServeur() != null)
-								System.out.print(data.getRow(r).getSlot(s).getServeur().getNumero() + " ");
-							else 
-								System.out.print("** ");
-						}
-					}
-					System.out.println("");
-				}
+		
 
 		// TODO A supprimer 
 		//Permet d'afficher dans la console à quoi "ressemble" le data center 

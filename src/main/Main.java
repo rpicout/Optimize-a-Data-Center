@@ -2,6 +2,7 @@ package main;
 
 import heuristique.BinPacking;
 import heuristique.Gloutonne;
+import meta_heuristique.Descente;
 
 public class Main {
 
@@ -22,9 +23,14 @@ public class Main {
 		
 		data = f.getFromFile(fichierData);
 		BinPacking binPacking = new BinPacking();
-		Data essai = binPacking.getSolution(data);
-		ecritureResultats.write(essai, "BinPacking");
-		System.out.println("Score : " + score.calculScore(essai));
+		Data dataBinPacking = binPacking.getSolution(data);
+		ecritureResultats.write(dataBinPacking, "BinPacking");
+		System.out.println("Score : " + score.calculScore(dataBinPacking));
+		
+		Descente descente = new Descente();
+		data = f.getFromFile(fichierData);
+		Data currentSol = binPacking.getSolution(data);
+		Data dataDescente = descente.getSolutionDescente(dataBinPacking, currentSol);
 
 	}
 
