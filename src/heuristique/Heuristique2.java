@@ -20,7 +20,16 @@ public class Heuristique2 {
 	 */
 
 	private List<Integer> serverOnCenter = new ArrayList<Integer>();
+	private List<Integer> serverOnCenter2 = new ArrayList<Integer>();
 	
+	public List<Integer> getServerOnCenter() {
+		return serverOnCenter;
+	}
+
+	public void setServerOnCenter(List<Integer> serverOnCenter) {
+		this.serverOnCenter = serverOnCenter;
+	}
+
 	/**
 	 * On trie le tableau les capacités des serveurs par ordre décroissant
 	 * 
@@ -104,6 +113,7 @@ public class Heuristique2 {
 						}
 						add = true;
 						serverOnCenter.add(serveur.getNumero());
+						serverOnCenter2.add(serveur.getNumero());
 					}
 					//System.out.println(triCapacite[i] + " ajouté " + serveur.getCapacite() + " " + serveur.getTaille());
 				}
@@ -120,15 +130,15 @@ public class Heuristique2 {
 		}
 		
 		int numPool = 0;
-		while (!serverOnCenter.isEmpty()) {
-			if (serverOnCenter.size() != 1) {
-				int first = serverOnCenter.get(0);
-				int last = serverOnCenter.get(serverOnCenter.size()-1);
+		while (!serverOnCenter2.isEmpty()) {
+			if (serverOnCenter2.size() != 1) {
+				int first = serverOnCenter2.get(0);
+				int last = serverOnCenter2.get(serverOnCenter2.size()-1);
 				data.getServeurs(first).setPoule(numPool);
 				data.getServeurs(last).setPoule(numPool);
 				
-				serverOnCenter.remove(0);
-				serverOnCenter.remove(serverOnCenter.size()-1);
+				serverOnCenter2.remove(0);
+				serverOnCenter2.remove(serverOnCenter2.size()-1);
 				
 				numPool++;
 
@@ -136,8 +146,8 @@ public class Heuristique2 {
 					numPool = 0;
 			}
 			else {
-				data.getServeurs(serverOnCenter.get(0)).setPoule(numPool);
-				serverOnCenter.remove(0);
+				data.getServeurs(serverOnCenter2.get(0)).setPoule(numPool);
+				serverOnCenter2.remove(0);
 			}
 		}
 		
