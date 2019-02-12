@@ -54,29 +54,37 @@ public class Heuristique {
 		int indiceTailleMax, tailleMax;
 		boolean next = false;
 		boolean finCalcul = false;
+		List<Integer> indiceAjouter = new ArrayList<Integer>(); 
 
 		for (int i = 0; i < data.getNbServeur(); i++) {
 
 			finCalcul = false;
+			int iterator = i;
 
 			while (!finCalcul) {
 				next = false;
 				while (!next) { // TODO probleme d'indice (outOfBounds) que je ne trouve pas --'
-					if (serveurs[triServeur[i]].getCapacite() == currentCapacite) {
-						capaConstante.add(data.getServeurs(triServeur[i]));
-						i++;
-					} else {
-						currentCapacite = serveurs[triServeur[i]].getCapacite();
-						next = true;
+					if (!indiceAjouter.contains(iterator)) {
+						System.out.println("1");
+						if (serveurs[triServeur[iterator]].getCapacite() == currentCapacite) {
+							indiceAjouter.add(iterator);
+							capaConstante.add(data.getServeurs(triServeur[iterator]));
+							iterator ++;
+						} else {
+							System.out.println("2");
+							currentCapacite = serveurs[triServeur[iterator]].getCapacite();
+							next = true;
+						}
 					}
 				}
 
-				for (int j = capaConstante.size() - 1; j >= 0; j--) {
-
+				for (int j = capaConstante.size() - 1; j == 0; j--) {
+					System.out.println("3");
 					indiceTailleMax = 0;
 
 					for (int k = 0; k <= j; k++) {
 						if (capaConstante.get(k).getTaille() < capaConstante.get(indiceTailleMax).getTaille()) {
+							System.out.println("4");
 							indiceTailleMax = k;
 						}
 					}
