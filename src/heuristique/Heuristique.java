@@ -56,7 +56,7 @@ public class Heuristique {
 		boolean finCalcul = false;
 		List<Integer> indiceAjouter = new ArrayList<Integer>(); 
 
-		for (int i = 0; i < data.getNbServeur(); i++) {
+		for (int i = 0; i < data.getNbServeur() ; i++) {
 
 			finCalcul = false;
 			int iterator = i;

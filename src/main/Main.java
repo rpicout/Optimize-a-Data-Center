@@ -1,8 +1,8 @@
 package main;
 
-import heuristique.AutreEssai;
 import heuristique.BinPacking;
 import heuristique.Gloutonne;
+import heuristique.Heuristique;
 import meta_heuristique.Descente;
 
 public class Main {
@@ -17,7 +17,7 @@ public class Main {
 		EcritureResultats ecritureResultats = new EcritureResultats();
 		Score score = new Score();
 
-		Gloutonne gloutonne = new Gloutonne();
+	/**	Gloutonne gloutonne = new Gloutonne();
 		Data newdata = gloutonne.getSolution(data);
 		ecritureResultats.write(newdata, "Gloutonne");
 		System.out.println("Score : " + score.calculScore(newdata));
@@ -36,11 +36,12 @@ public class Main {
 
 		Data essai = binPacking.getSolution(data);
 		ecritureResultats.write(essai, "BinPacking");
-		System.out.println("Score : " + score.calculScore(essai));
+		System.out.println("Score : " + score.calculScore(essai));*/
 		
 		data = f.getFromFile(fichierData);
-		AutreEssai autreEssai = new AutreEssai();
+		Heuristique autreEssai = new Heuristique();
 		int[] voir = autreEssai.getTriServeurCapaciteTaille(data);
+		
 
 	}
 
