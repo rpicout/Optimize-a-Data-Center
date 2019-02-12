@@ -55,7 +55,7 @@ public class Heuristique {
 		boolean next = false;
 		boolean finCalcul = false;
 
-		for (int i = 0; i < data.getNbServeur(); i++) {
+		for (int i = 0; i < data.getNbServeur() ; i++) {
 
 			finCalcul = false;
 
