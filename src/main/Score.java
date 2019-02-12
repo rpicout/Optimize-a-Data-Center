@@ -23,17 +23,19 @@ public class Score {
 		int capacitePoolRow;
 		Serveur serveur;
 
+		int[] capaRow = new int[data.getNbRow()];
 		
 		for (int p = 0; p < data.getNbPoule(); p++) {
-			
+			int nbserv = 0;
 			capacitePool = 0;
 			for (int m = 0; m < data.getNbServeur(); m++) {
 				serveur = data.getServeurs(m);
 				if (serveur.getPoule() == p) {
 					capacitePool += serveur.getCapacite();
+					nbserv++;
 				}
 			}
-			
+			System.out.println("Capacité pool " + p + " : " + capacitePool + " / " + nbserv);
 			for (int r = 0; r < data.getNbRow(); r++) {
 				
 				capacitePoolRow = 0;
@@ -47,6 +49,7 @@ public class Score {
 							if (data.getRow(r).getSlot(s).getServeur() == serveur) {
 								capacitePoolRow += serveur.getCapacite();
 								capaciteAdd = true;
+								capaRow[r]+=serveur.getCapacite();
 							}
 							s++;
 						}
@@ -57,11 +60,13 @@ public class Score {
 					minCapaciteGarantie = capacitePool - capacitePoolRow;
 				
 			}
-			
 			if (minCapaciteGarantiePool > minCapaciteGarantie)
 				minCapaciteGarantiePool = minCapaciteGarantie;
 		}
-		
+
+		for (int i = 0; i < data.getNbRow(); i++) {
+			System.out.println("Capacité row " + i + " : " + capaRow[i]);
+		}
 		return minCapaciteGarantiePool;
 	}
 	
