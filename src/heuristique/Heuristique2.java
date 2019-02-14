@@ -22,6 +22,16 @@ public class Heuristique2 {
 	private List<Integer> serverOnCenter = new ArrayList<Integer>();
 	private List<Integer> serverOnCenter2 = new ArrayList<Integer>();
 	
+	private List<List<Integer>> serverOnEachRow = new ArrayList<>();
+	
+	public List<List<Integer>> getServerOnEachRow() {
+		return serverOnEachRow;
+	}
+
+	public void setServerOnEachRow(List<List<Integer>> serverOnEachRow) {
+		this.serverOnEachRow = serverOnEachRow;
+	}
+
 	public List<Integer> getServerOnCenter() {
 		return serverOnCenter;
 	}
@@ -44,6 +54,7 @@ public class Heuristique2 {
 		int[] triServeur = new int[data.getNbServeur()]; 
 		int numTailleMax;
 		int capaciteMax;
+		
 		
 		for (int i = 0; i < data.getNbServeur(); i++){
 			triServeur[i] = i;
@@ -82,6 +93,11 @@ public class Heuristique2 {
 		Serveur serveur = null;
 		Slot slot = null;
 		
+
+		for (int i = 0; i < data.getNbRow(); i++) {
+			serverOnEachRow.add(new ArrayList<Integer>());
+		}
+		
 		for (int i = 0; i < data.getNbServeur(); i++){
 			
 			serveur = data.getServeurs(triCapacite[i]);
@@ -114,6 +130,7 @@ public class Heuristique2 {
 						add = true;
 						serverOnCenter.add(serveur.getNumero());
 						serverOnCenter2.add(serveur.getNumero());
+						serverOnEachRow.get(r).add(serveur.getNumero());
 					}
 					//System.out.println(triCapacite[i] + " ajouté " + serveur.getCapacite() + " " + serveur.getTaille());
 				}

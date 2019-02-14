@@ -35,7 +35,6 @@ public class Score {
 					nbserv++;
 				}
 			}
-			System.out.println("Capacité pool " + p + " : " + capacitePool + " / " + nbserv);
 			for (int r = 0; r < data.getNbRow(); r++) {
 				
 				capacitePoolRow = 0;
@@ -63,10 +62,7 @@ public class Score {
 			if (minCapaciteGarantiePool > minCapaciteGarantie)
 				minCapaciteGarantiePool = minCapaciteGarantie;
 		}
-
-		for (int i = 0; i < data.getNbRow(); i++) {
-			System.out.println("Capacité row " + i + " : " + capaRow[i]);
-		}
+		
 		return minCapaciteGarantiePool;
 	}
 	
