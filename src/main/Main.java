@@ -3,7 +3,9 @@ package main;
 import heuristique.BinPacking;
 import heuristique.Gloutonne;
 import heuristique.Heuristique;
+import heuristique.Heuristique2;
 import meta_heuristique.Descente;
+import meta_heuristique.RechercheLocalePool;
 
 public class Main {
 
@@ -16,6 +18,12 @@ public class Main {
 
 		EcritureResultats ecritureResultats = new EcritureResultats();
 		Score score = new Score();
+		
+		RechercheLocalePool rechercheLocalePool = new RechercheLocalePool();
+		data = f.getFromFile(fichierData);
+		Data dataRLocaleP = rechercheLocalePool.getSolutionRechercheLocalePool();
+		ecritureResultats.write(dataRLocaleP, "RechercheLocalePool");
+		System.out.println("Score : " + score.calculScore(dataRLocaleP));
 
 	/**	Gloutonne gloutonne = new Gloutonne();
 		Data newdata = gloutonne.getSolution(data);
@@ -38,10 +46,6 @@ public class Main {
 		ecritureResultats.write(essai, "BinPacking");
 		System.out.println("Score : " + score.calculScore(essai));*/
 		
-		data = f.getFromFile(fichierData);
-		Heuristique autreEssai = new Heuristique();
-		int[] voir = autreEssai.getTriServeurCapaciteTaille(data);
-		//Data essai = autreEssai.getSolution(data);
 
 	}
 

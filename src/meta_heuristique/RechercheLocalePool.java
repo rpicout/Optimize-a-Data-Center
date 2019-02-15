@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import heuristique.Heuristique2;
 import main.Data;
@@ -54,75 +55,96 @@ public class RechercheLocalePool {
 		Heuristique2 heuristique = new Heuristique2();
 		Data dataHeuristique = heuristique.getSolution(data2);
 		
-		List<List<Integer>> serverOnEachRow = heuristique.getServerOnEachRow();
-		
-		int currentScore = score.calculScore(dataHeuristique);
-		int scoreObtenu;
+		int scoreObtenu = score.calculScore(dataHeuristique);;
 		
 		List<Integer> serverOnCenter2 = heuristique.getServerOnCenter();
+
+		List<List<Integer>> serverOnEachRow = heuristique.getServerOnEachRow();
+		
+		Random random = new Random();
+		
 		
 		boolean scoreUpgrade = false;
 		int iteration = 0;
+		
+		int bestScore = score.calculScore(dataHeuristique);
+		
+
 		do {
+			int bestMoveServ2 = -1;
+			int bestMovePool2 = -1;
+			int bestMoveServ1 = -1;
+			int bestMovePool1 = -1;
 			iteration ++;
 			List<Map<Integer, List<Integer>>> numServInPoolInRow = getNumServInPoolInRow(dataHeuristique, serverOnCenter2);
-			for (int i = 0; i < dataHeuristique.getNbPoule(); i++) {
-				System.out.println("Pool : " + i);
-				for (int r = 0; r < dataHeuristique.getNbRow(); r++) {
-					for (int numServ : numServInPoolInRow.get(i).get(r)) {
-						int bestMoveServ2 = -1;
-						int bestMovePool2 = -1;
-						int bestScore = score.calculScore(dataHeuristique);
-						int r1 = 0;
-						while (r1 < dataHeuristique.getNbRow()) {
-							for (int numServ2 : serverOnEachRow.get(r1)) {
-								int k = dataHeuristique.getServeurs(numServ2).getPoule();
-								if (k != i) {
-									dataHeuristique.getServeurs(numServ).setPoule(k);
-									dataHeuristique.getPoule(k).getServeurs().remove(dataHeuristique.getServeurs(numServ2));
-									dataHeuristique.getPoule(k).addServeur(dataHeuristique.getServeurs(numServ));
-									dataHeuristique.getServeurs(numServ2).setPoule(i);
-									dataHeuristique.getPoule(i).getServeurs().remove(dataHeuristique.getServeurs(numServ));
-									dataHeuristique.getPoule(i).addServeur(dataHeuristique.getServeurs(numServ2));
 
-									scoreObtenu = score.calculScore(dataHeuristique);
-									if (bestScore <= scoreObtenu) {
-										scoreUpgrade = true;
-										
-										bestScore = score.calculScore(dataHeuristique);
-										bestMoveServ2 = numServ2;
-										bestMovePool2 = k;
-									}
-									dataHeuristique.getServeurs(numServ).setPoule(i);
-									dataHeuristique.getPoule(i).getServeurs().remove(dataHeuristique.getServeurs(numServ2));
-									dataHeuristique.getPoule(i).addServeur(dataHeuristique.getServeurs(numServ));
-									dataHeuristique.getServeurs(numServ2).setPoule(k);
-									dataHeuristique.getPoule(k).getServeurs().remove(dataHeuristique.getServeurs(numServ));
-									dataHeuristique.getPoule(k).addServeur(dataHeuristique.getServeurs(numServ2));
-									scoreObtenu = score.calculScore(dataHeuristique);
-								}
+			
+			int pool = score.getPool();
+				
+				System.out.println("Pool : " + pool);
+				scoreUpgrade = false;
+				for (int r = 0; r < dataHeuristique.getNbRow(); r++) {
+					for (int numServ : numServInPoolInRow.get(pool).get(r)) {
+						for (int r1 = 0; r1 < dataHeuristique.getNbRow(); r1++) {
+							if (r != r1) {
+								for (int numServ2 : serverOnEachRow.get(r1)) {
+										int k = dataHeuristique.getServeurs(numServ2).getPoule();
+										if (k != pool) {
+														
+											dataHeuristique.getServeurs(numServ).setPoule(k);
+											dataHeuristique.getPoule(k).getServeurs().remove(dataHeuristique.getServeurs(numServ2));
+											dataHeuristique.getPoule(k).addServeur(dataHeuristique.getServeurs(numServ));
+											dataHeuristique.getServeurs(numServ2).setPoule(pool);
+											dataHeuristique.getPoule(pool).getServeurs().remove(dataHeuristique.getServeurs(numServ));
+											dataHeuristique.getPoule(pool).addServeur(dataHeuristique.getServeurs(numServ2));
+											
+											scoreObtenu = score.calculScore(dataHeuristique);
+											if (bestScore < scoreObtenu) {
+												bestMoveServ2 = numServ2;
+												bestMovePool2 = k;
+												bestMoveServ1 = numServ;
+												bestMovePool1 = pool;
+	
+	
+												if (bestScore != scoreObtenu){
+													bestScore = score.calculScore(dataHeuristique);
+												}
+											}
+	
+											dataHeuristique.getServeurs(numServ).setPoule(pool);
+											dataHeuristique.getPoule(pool).getServeurs().remove(dataHeuristique.getServeurs(numServ2));
+											dataHeuristique.getPoule(pool).addServeur(dataHeuristique.getServeurs(numServ));
+											dataHeuristique.getServeurs(numServ2).setPoule(k);
+											dataHeuristique.getPoule(k).getServeurs().remove(dataHeuristique.getServeurs(numServ));
+											dataHeuristique.getPoule(k).addServeur(dataHeuristique.getServeurs(numServ2));
+	
+											scoreObtenu = score.calculScore(dataHeuristique);
+											numServInPoolInRow = getNumServInPoolInRow(dataHeuristique, serverOnCenter2);
+										}
+								}	
 							}
-							r1++;
 						}
-						if (bestMoveServ2 != -1) {
-							dataHeuristique.getServeurs(numServ).setPoule(bestMovePool2);
-							dataHeuristique.getPoule(bestMovePool2).getServeurs().remove(dataHeuristique.getServeurs(bestMoveServ2));
-							dataHeuristique.getPoule(bestMovePool2).addServeur(dataHeuristique.getServeurs(numServ));
-							dataHeuristique.getServeurs(bestMoveServ2).setPoule(i);
-							dataHeuristique.getPoule(i).getServeurs().remove(dataHeuristique.getServeurs(numServ));
-							dataHeuristique.getPoule(i).addServeur(dataHeuristique.getServeurs(bestMoveServ2));
-							
-							currentScore = score.calculScore(dataHeuristique);
-							System.out.println("Iteration n°"+ (iteration) + " " + currentScore);
-							numServInPoolInRow = getNumServInPoolInRow(dataHeuristique, serverOnCenter2);
-						}
+
+						
 					}
 				}
-				
+			
+			
+			if (bestMoveServ2 != -1) {
+				dataHeuristique.getServeurs(bestMoveServ1).setPoule(bestMovePool2);
+				dataHeuristique.getPoule(bestMovePool2).getServeurs().remove(dataHeuristique.getServeurs(bestMoveServ2));
+				dataHeuristique.getPoule(bestMovePool2).addServeur(dataHeuristique.getServeurs(bestMoveServ1));
+				dataHeuristique.getServeurs(bestMoveServ2).setPoule(bestMovePool1);
+				dataHeuristique.getPoule(bestMovePool1).getServeurs().remove(dataHeuristique.getServeurs(bestMoveServ1));
+				dataHeuristique.getPoule(bestMovePool1).addServeur(dataHeuristique.getServeurs(bestMoveServ2));
+				scoreUpgrade = true;
+
+				scoreObtenu = score.calculScore(dataHeuristique);
+				System.out.println("Iteration n°"+ (iteration) + " " + scoreObtenu);
 			}
 		} while (scoreUpgrade);
 			
 		return dataHeuristique;
 	}
-	
+
 }
