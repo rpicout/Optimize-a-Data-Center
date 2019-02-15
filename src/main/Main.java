@@ -41,7 +41,7 @@ public class Main {
 		data = f.getFromFile(fichierData);
 		Heuristique autreEssai = new Heuristique();
 		int[] voir = autreEssai.getTriServeurCapaciteTaille(data);
-		
+		//Data essai = autreEssai.getSolution(data);
 
 	}
 
