@@ -37,7 +37,6 @@ public class LectureDonnees {
 					row = scanner.nextInt();
 					slot = scanner.nextInt();
 					data.getRow(row).getSlot(slot).setIndispo(true);
-					//data.setCoordSlotIndispo(i, new Coord(scanner.nextInt(),scanner.nextInt()));
 				}
 				
 				//Lecture des cractéristiques serveur ( taille et capacité)

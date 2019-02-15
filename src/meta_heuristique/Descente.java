@@ -1,9 +1,7 @@
 package meta_heuristique;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import main.Data;
@@ -22,12 +20,13 @@ public class Descente {
 	private Score score = new Score();
 	
 	public Data getSolutionDescente (Data data, Data currentSol) {
+
+		System.out.println("Début descente");
 		
 		double proba = Math.random();
 		
 		double p1 = 0.3;
 		double p2 = 0.3;
-		double p3 = 0.4;
 		
 		Random random = new Random(); 
 		
@@ -42,11 +41,9 @@ public class Descente {
 
 			currentSol = data;
 
-			System.out.println("Score itération n° " + (iteration + 1) + " : " + score.calculScore(currentSol));
 			proba = Math.random();
 			// On enlève un serveur au hasard
 			if (proba <= p1) {
-				System.out.println("p"+1);
 				boolean enlever = false;
 				while (!enlever) {
 					numServeurAlea = random.nextInt(624);
@@ -72,7 +69,6 @@ public class Descente {
 								if (scoreMax < score.calculScore(currentSol)) {
 									scoreMax = score.calculScore(currentSol);
 									data = currentSol;
-									System.out.println("Score itération n° " + (iteration + 1) + " : " + scoreMax);
 								}
 								else 
 									currentSol = null;
@@ -93,14 +89,12 @@ public class Descente {
 			else {
 				//Placer un serveur qui n’est pas encore affecté sur une rangée et un slot libre aléatoire et sur une pool aléatoire
 				if (proba <= p2 + p1) {
-					System.out.println("p"+2);
 	
 					List<Coord> slotDispo = new ArrayList<Coord>();
 					
 					for (int j = 0; j < currentSol.getNbRow(); j++) {
 						for (int k = 0; k < currentSol.getNbSlot(); k++) {
 							if (!currentSol.getRow(j).getSlot(k).isIndispo() && currentSol.getRow(j).getSlot(k).getServeur() == null) {
-							//	System.out.println("1");
 								slotDispo.add(new Coord(j, k));
 							}
 						}
@@ -119,7 +113,6 @@ public class Descente {
 						int taille = 0;
 						Slot slot = currentSol.getRow(numRowAlea).getSlot(k);
 						while (slot.getServeur() == null && !slot.isIndispo() && k < currentSol.getNbSlot()) {
-						//	System.out.println("2");
 							slot = currentSol.getRow(numRowAlea).getSlot(k);
 							taille ++;
 							k ++;
@@ -131,7 +124,6 @@ public class Descente {
 								int tailleServeur = currentSol.getServeurs(i).getTaille();
 								
 								for (int j = numSlotAlea; j < tailleServeur + numSlotAlea; j++) {
-								//	System.out.println("4");
 									currentSol.getRow(numRowAlea).getSlot(j).setServeur(currentSol.getServeurs(i));
 								}
 								
@@ -143,7 +135,6 @@ public class Descente {
 								if (scoreMax < score.calculScore(currentSol)) {
 									scoreMax = score.calculScore(currentSol);
 									data = currentSol;
-									System.out.println("Score itération n° " + (iteration + 1) + " : " + scoreMax);
 								}
 								else 
 									currentSol = null;
@@ -152,14 +143,12 @@ public class Descente {
 							}
 							else
 								i++;
-							//System.out.println("3 : "+(i-1) + " " + ajouter);
 							
 						}
 					}
 				}
 				//Affecter un serveur qui est déjà placé à un pool aléatoire
 				else {
-					System.out.println("p"+3);
 					boolean changer = false;
 					while (!changer) {
 						numServeurAlea = random.nextInt(624);
@@ -181,7 +170,6 @@ public class Descente {
 							if (scoreMax < score.calculScore(currentSol)) {
 								scoreMax = score.calculScore(currentSol);
 								data = currentSol;
-								System.out.println("Score itération n° " + (iteration + 1) + " : " + scoreMax);
 							}
 							else 
 								currentSol = null;
@@ -192,6 +180,8 @@ public class Descente {
 				}
 			}
 		}
+
+		System.out.println("Fin descente");
 		return data;
 	}
 

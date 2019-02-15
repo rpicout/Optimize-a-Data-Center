@@ -66,13 +66,12 @@ public class Heuristique {
 				next = false;
 				while (!next) { 
 					if (!indiceAjouter.contains(iterator)) {
-						System.out.println("1"); //TODO toujours pb de outOfBound 625...
+						//TODO toujours pb de outOfBound 625...
 						if (serveurs[triServeur[iterator]].getCapacite() == currentCapacite) {
 							indiceAjouter.add(iterator);
 							capaConstante.add(data.getServeurs(triServeur[iterator]));
 							iterator ++;
 						} else {
-							System.out.println("2");
 							currentCapacite = serveurs[triServeur[iterator]].getCapacite();
 							indiceAjouter.clear();
 							next = true;
@@ -81,12 +80,10 @@ public class Heuristique {
 				}
 
 				for (int j = capaConstante.size()-1 ; j >= 0; j--) {
-					System.out.println("3");
 					indiceTailleMax = 0;
 
 					for (int k = 0; k < j; k++) {
 						if (capaConstante.get(k).getTaille() > capaConstante.get(indiceTailleMax).getTaille()) {
-							System.out.println("4");
 							indiceTailleMax = k;
 						}
 					}
@@ -105,25 +102,19 @@ public class Heuristique {
 				finCalcul = true;
 
 			}
-			// System.out.println("Numero de serveur : " + triServeur[i] + ", Capacité : " +
-			// serveurs[triServeur[i]].getCapacite() + ", Taille : " +
-			// serveurs[triServeur[i]].getTaille());
 		}
-		for (int i = 0; i < data.getNbServeur(); i++) {
-			System.out.println("Numero de serveur : " + triServeur[i] + ", Capacité : "
-					+ serveurs[triServeur[i]].getCapacite() + ", Taille : " + serveurs[triServeur[i]].getTaille());
-		}
+		
 		return triServeur;
 	}
 	/**
-	 * Méthode calculant la solution de la méthode gloutonne
+	 * Méthode calculant la solution de la méthode heuristique
 	 * 
 	 * @param data
-	 * @return la solution de la méthode gloutonne
+	 * @return la solution de la méthode heuristique
 	 */
 	public Data getSolution(Data data){
 		
-		System.out.println("Début méthode gloutonne");
+		System.out.println("Début méthode heuristique");
 		
 		int[] triCapacite = getTriServeurCapaciteTaille(data);
 		Serveur serveur = null;
@@ -160,7 +151,6 @@ public class Heuristique {
 						}
 						add = true;
 					}
-					//System.out.println(triCapacite[i] + " ajouté " + serveur.getCapacite() + " " + serveur.getTaille());
 				}
 				
 				if (!add) {
@@ -192,23 +182,7 @@ public class Heuristique {
 			}
 		}
 		
-		// TODO A supprimer 
-		//Permet d'afficher dans la console à quoi "ressemble" le data center 
-		for (int r = 0; r < data.getNbRow(); r++){
-			for (int s = 0; s < data.getNbSlot(); s++){
-				if (data.getRow(r).getSlot(s).isIndispo())
-					System.out.print(".. ");
-				else {
-					if (data.getRow(r).getSlot(s).getServeur() != null)
-						System.out.print(data.getRow(r).getSlot(s).getServeur().getNumero() + " ");
-					else 
-						System.out.print("** ");
-				}
-			}
-			System.out.println("");
-		}
-		
-		System.out.println("Fin méthode gloutonne");
+		System.out.println("Fin méthode heuristique");
 		return data;
 	}
 

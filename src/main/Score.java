@@ -19,14 +19,6 @@ public class Score {
 		this.pool = pool;
 	}
 
-//	public List<Integer> getPool() {
-//		return pool;
-//	}
-//
-//	public void setPool(List<Integer> pool) {
-//		this.pool = pool;
-//	}
-
 	public List<Integer> getCapaciteG() {
 		return capaciteG;
 	}
@@ -56,17 +48,14 @@ public class Score {
 
 		int[] capaRow = new int[data.getNbRow()];
 		
-		//pool = new ArrayList<Integer>();
 		capaciteG = new ArrayList<Integer>();
 		
 		for (int p = 0; p < data.getNbPoule(); p++) {
-			int nbserv = 0;
 			capacitePool = 0;
 			for (int m = 0; m < data.getNbServeur(); m++) {
 				serveur = data.getServeurs(m);
 				if (serveur.getPoule() == p) {
 					capacitePool += serveur.getCapacite();
-					nbserv++;
 				}
 			}
 			for (int r = 0; r < data.getNbRow(); r++) {
@@ -98,20 +87,6 @@ public class Score {
 			if (minCapaciteGarantiePool > minCapaciteGarantie) {
 				minCapaciteGarantiePool = minCapaciteGarantie;
 			}
-//			if (p == 0) {
-//				capaGarantie = minCapaciteGarantie;
-//				pool.add(p);
-//			}
-//			else {
-//				if (minCapaciteGarantie == capaGarantie) {
-//					pool.add(p);
-//				} 
-//				else if (minCapaciteGarantie < capaGarantie) {
-//					capaGarantie = minCapaciteGarantie;
-//					pool.clear();
-//					pool.add(p);
-//				}
-//			}
 			if (p == 0) {
 				capaGarantie = minCapaciteGarantie;
 				pool = p;

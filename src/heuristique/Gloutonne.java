@@ -1,10 +1,23 @@
 package heuristique;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import main.Data;
 import model.Serveur;
 import model.Slot;
 
 public class Gloutonne {
+	
+	private List<Integer> serverOnCenter = new ArrayList<Integer>();
+	
+	public List<Integer> getServerOnCenter() {
+		return serverOnCenter;
+	}
+
+	public void setServerOnCenter(List<Integer> serverOnCenter) {
+		this.serverOnCenter = serverOnCenter;
+	}
 	
 	/**
 	 * On trie le tableau les capacités des serveurs par ordre décroissant
@@ -13,8 +26,6 @@ public class Gloutonne {
 	 * @return le tableau d'indice du tableau avec les capacités triées par ordre décroissant
 	 */
 	public int[] getTriServeurCapacite(Data data){
-		
-		System.out.println("Début tri");
 		
 		Serveur[] serveurs = data.getServeurs();
 		int[] triServeur = new int[data.getNbServeur()]; 
@@ -40,7 +51,6 @@ public class Gloutonne {
 			triServeur[i] = capaciteMax;
 			
 		}
-		System.out.println("Fin tri");
 		return triServeur;
 	}
 	
@@ -89,8 +99,8 @@ public class Gloutonne {
 							slot.setServeur(serveur);
 						}
 						add = true;
+						serverOnCenter.add(serveur.getNumero());
 					}
-					//System.out.println(triCapacite[i] + " ajouté " + serveur.getCapacite() + " " + serveur.getTaille());
 				}
 				
 				if (!add) {
@@ -120,22 +130,6 @@ public class Gloutonne {
 				}
 				
 			}
-		}
-		
-		// TODO A supprimer 
-		//Permet d'afficher dans la console à quoi "ressemble" le data center 
-		for (int r = 0; r < data.getNbRow(); r++){
-			for (int s = 0; s < data.getNbSlot(); s++){
-				if (data.getRow(r).getSlot(s).isIndispo())
-					System.out.print(".. ");
-				else {
-					if (data.getRow(r).getSlot(s).getServeur() != null)
-						System.out.print(data.getRow(r).getSlot(s).getServeur().getNumero() + " ");
-					else 
-						System.out.print("** ");
-				}
-			}
-			System.out.println("");
 		}
 		
 		System.out.println("Fin méthode gloutonne");

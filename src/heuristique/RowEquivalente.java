@@ -7,7 +7,7 @@ import main.Data;
 import model.Serveur;
 import model.Slot;
 
-public class Heuristique2 {
+public class RowEquivalente {
 	
 	/*
 	 * Ajouter les serveurs par ordre décroissant de capacité aux slots
@@ -48,8 +48,6 @@ public class Heuristique2 {
 	 */
 	public int[] getTriServeurCapacite(Data data){
 		
-		System.out.println("Début tri");
-		
 		Serveur[] serveurs = data.getServeurs();
 		int[] triServeur = new int[data.getNbServeur()]; 
 		int numTailleMax;
@@ -75,7 +73,7 @@ public class Heuristique2 {
 			triServeur[i] = capaciteMax;
 			
 		}
-		System.out.println("Fin tri");
+
 		return triServeur;
 	}
 	
@@ -87,7 +85,7 @@ public class Heuristique2 {
 	 */
 	public Data getSolution(Data data){
 		
-		System.out.println("Début méthode gloutonne");
+		System.out.println("Début méthode rowEquivalentes");
 		
 		int[] triCapacite = getTriServeurCapacite(data);
 		Serveur serveur = null;
@@ -132,7 +130,6 @@ public class Heuristique2 {
 						serverOnCenter2.add(serveur.getNumero());
 						serverOnEachRow.get(r).add(serveur.getNumero());
 					}
-					//System.out.println(triCapacite[i] + " ajouté " + serveur.getCapacite() + " " + serveur.getTaille());
 				}
 				
 				if (!add) {
@@ -167,7 +164,8 @@ public class Heuristique2 {
 				serverOnCenter2.remove(0);
 			}
 		}
-		
+
+		System.out.println("Fin méthode rowEquivalentes");
 		return data;
 	}
 	

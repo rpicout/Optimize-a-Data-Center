@@ -1,51 +1,27 @@
 package main;
 
-import heuristique.BinPacking;
-import heuristique.Gloutonne;
-import heuristique.Heuristique;
-import heuristique.Heuristique2;
-import meta_heuristique.Descente;
+import heuristique.RowEquivalente;
 import meta_heuristique.RechercheLocalePool;
 
 public class Main {
 
 	public static void main(String[] args) {
-		
+
+		EcritureResultats ecritureResultats = new EcritureResultats();
+		Score score = new Score();
+
 		String fichierData = "InputData/data-center_";
 
 		LectureDonnees f = new LectureDonnees();
 		Data data = f.getFromFile(fichierData);
-
-		EcritureResultats ecritureResultats = new EcritureResultats();
-		Score score = new Score();
+		
+		RowEquivalente heuristique = new RowEquivalente();
+		Data dataHeuristique = heuristique.getSolution(data);
 		
 		RechercheLocalePool rechercheLocalePool = new RechercheLocalePool();
-		data = f.getFromFile(fichierData);
-		Data dataRLocaleP = rechercheLocalePool.getSolutionRechercheLocalePool();
+		Data dataRLocaleP = rechercheLocalePool.getSolutionRechercheLocalePool(dataHeuristique, heuristique);
 		ecritureResultats.write(dataRLocaleP, "RechercheLocalePool");
-		System.out.println("Score : " + score.calculScore(dataRLocaleP));
-
-	/**	Gloutonne gloutonne = new Gloutonne();
-		Data newdata = gloutonne.getSolution(data);
-		ecritureResultats.write(newdata, "Gloutonne");
-		System.out.println("Score : " + score.calculScore(newdata));
-		
-		data = f.getFromFile(fichierData);
-		BinPacking binPacking = new BinPacking();
-
-		Data dataBinPacking = binPacking.getSolution(data);
-		ecritureResultats.write(dataBinPacking, "BinPacking");
-		System.out.println("Score : " + score.calculScore(dataBinPacking));
-		
-		Descente descente = new Descente();
-		data = f.getFromFile(fichierData);
-		Data currentSol = binPacking.getSolution(data);
-		Data dataDescente = descente.getSolutionDescente(dataBinPacking, currentSol);
-
-		Data essai = binPacking.getSolution(data);
-		ecritureResultats.write(essai, "BinPacking");
-		System.out.println("Score : " + score.calculScore(essai));*/
-		
+		System.out.println("Score : " + score.calculScore(dataRLocaleP));		
 
 	}
 

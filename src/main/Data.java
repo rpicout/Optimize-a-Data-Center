@@ -14,7 +14,7 @@ public class Data {
 	private int nbServeur;
 	
 	private Coord[] coordSlotIndispo;
-	private Serveur[] serveurs; // attention a l'indice zéro c'est le serveur numéro 1 ! bisous
+	private Serveur[] serveurs; 
 	private Poule[] poule;
 	private Row[] row;
 	
