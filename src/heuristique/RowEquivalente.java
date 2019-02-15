@@ -144,24 +144,20 @@ public class RowEquivalente {
 		}
 		
 		int numPool = 0;
-		while (!serverOnCenter2.isEmpty()) {
-			if (serverOnCenter2.size() != 1) {
-				int first = serverOnCenter2.get(0);
-				int last = serverOnCenter2.get(serverOnCenter2.size()-1);
-				data.getServeurs(first).setPoule(numPool);
-				data.getServeurs(last).setPoule(numPool);
+		for (int r = 0; r < data.getNbRow(); r++){
+			for (int s = 0; s < data.getNbSlot(); s++){
 				
-				serverOnCenter2.remove(0);
-				serverOnCenter2.remove(serverOnCenter2.size()-1);
-				
-				numPool++;
+				serveur = data.getRow(r).getSlot(s).getServeur();
+				if (serveur != null && serveur.getPoule() == -1) {
+					
+					serveur.setPoule(numPool);
+					data.getPoule(numPool).addServeur(serveur);
+					numPool++;
 
-				if (numPool == data.getNbPoule())
-					numPool = 0;
-			}
-			else {
-				data.getServeurs(serverOnCenter2.get(0)).setPoule(numPool);
-				serverOnCenter2.remove(0);
+					if (numPool == data.getNbPoule())
+						numPool = 0;
+				}
+				
 			}
 		}
 

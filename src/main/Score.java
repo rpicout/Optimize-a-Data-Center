@@ -1,14 +1,10 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import model.Serveur;
 
 public class Score {
 
 	private int pool;
-	private List<Integer> capaciteG;
 	
 	
 	public int getPool() {
@@ -17,14 +13,6 @@ public class Score {
 
 	public void setPool(int pool) {
 		this.pool = pool;
-	}
-
-	public List<Integer> getCapaciteG() {
-		return capaciteG;
-	}
-
-	public void setCapaciteG(List<Integer> capaciteG) {
-		this.capaciteG = capaciteG;
 	}
 
 	/**
@@ -47,8 +35,6 @@ public class Score {
 		Serveur serveur;
 
 		int[] capaRow = new int[data.getNbRow()];
-		
-		capaciteG = new ArrayList<Integer>();
 		
 		for (int p = 0; p < data.getNbPoule(); p++) {
 			capacitePool = 0;
@@ -83,7 +69,6 @@ public class Score {
 				}
 				
 			}
-			capaciteG.add(minCapaciteGarantie);
 			if (minCapaciteGarantiePool > minCapaciteGarantie) {
 				minCapaciteGarantiePool = minCapaciteGarantie;
 			}

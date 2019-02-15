@@ -17,6 +17,8 @@ public class Main {
 		
 		RowEquivalente heuristique = new RowEquivalente();
 		Data dataHeuristique = heuristique.getSolution(data);
+		ecritureResultats.write(dataHeuristique, "RowEquivalent");
+		System.out.println("Score : " + score.calculScore(dataHeuristique));		
 		
 		RechercheLocalePool rechercheLocalePool = new RechercheLocalePool();
 		Data dataRLocaleP = rechercheLocalePool.getSolutionRechercheLocalePool(dataHeuristique, heuristique);
